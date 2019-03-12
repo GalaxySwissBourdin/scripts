@@ -6,7 +6,6 @@
 
   date=$(date +"_%y-%m-%d")
   backup_path="/root/backups"
-  res1=$(date +%s.%N)
 
 #### Couleurs
   White='\e[1;37m'
@@ -23,34 +22,15 @@
 ### UTILITAIRES et DIVERS
 ###################################################
 
-script_timings(){
-
-  res2=$(date +%s.%N)
-  dt=$(echo "$res2 - $res1" | bc)
-  dd=$(echo "$dt/86400" | bc)
-  dt2=$(echo "$dt-86400*$dd" | bc)
-  dh=$(echo "$dt2/3600" | bc)
-  dt3=$(echo "$dt2-3600*$dh" | bc)
-  dm=$(echo "$dt3/60" | bc)
-  ds=$(echo "$dt3-60*$dm" | bc)
-
-  printf "Temps écoulé: %02.4f s \n" $ds
-
-}
-
 script_start(){
 
   echo -e "${Green}--------------------------------------------------------------------------------${NC}"
   echo -e "${Green}------------------------   DEBUT  DU  SCRIPT  ----------------------------------${NC}"
   echo -e "${Green}--------------------------------------------------------------------------------${NC}"
 
-  script_timings
-
 }
 
 script_end(){
-
-  script_timings
 
   echo -e "${Red}--------------------------------------------------------------------------------${NC}"
   echo -e "${Red}--------------------------   FIN   DU   SCRIPT  --------------------------------${NC}"
@@ -72,10 +52,8 @@ sauvegarde_variables(){
   if test $# -lt 1
   then
     echo "Manque variables !"
-    exit
   fi
 
-script_timings
 }
 
 #######################
@@ -97,7 +75,6 @@ test_espace(){
     exit 1
   fi
 
-script_timings
 }
 
 ###################################
@@ -107,11 +84,8 @@ sauvegarde_export(){
 
 for i in $*
 do
-  echo -e "++++++++++++++++++++++++++++++++++++"
   echo -e "Sauvegarde de la base ${i}"
-  echo -e "++++++++++++++++++++++++++++++++++++"
-  mysqldump --verbose --databases $i > $backup_path/$i$date.sql
-  script_timings
+  mysqldump --verbose --databases $i --result-file=$backup_path/$i$date.sql
 
   sleep 1
 done
@@ -137,11 +111,11 @@ sauvegarde_zip(){
 ################### SCRIPT PRINCIPAL ###############################
 ####################################################################
 
-script_start >> /var/logs/backup.log
+#script_start >> /var/log/backup.log
 
-sauvegarde_variables >> /var/logs/backup.log
-test_espace >> /var/logs/backup.log
+#sauvegarde_variables >> /var/log/backup.log
+#test_espace >> /var/log/backup.log
 
-sauvegarde_export >> /var/logs/backup.log
+sauvegarde_export >> /var/log/backup.log
 
-script_end >> /var/logs/backup.log
+#script_end >> /var/log/backup.log
