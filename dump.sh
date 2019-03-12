@@ -11,16 +11,13 @@ export PATH=/bin:/usr/bin:/usr/local/bin
 TODAY=`date +"%d%b%Y"`
 
 ################################################################
-################## Update below values  ########################
 
 BACKUP_PATH='/root/backups'
-DATABASE_NAME='glpi'
-BACKUP_RETAIN_DAYS=30   ## Number of days to keep local backup copy
+BACKUP_RETAIN_DAYS=30
 
 #################################################################
 
 mkdir -p ${BACKUP_PATH}/${TODAY}
-echo "Backup started for database - ${DATABASE_NAME}"
 
 for i in $*
 do
@@ -29,13 +26,13 @@ do
 done
 
 if [ $? -eq 0 ]; then
-  echo "Database backup successfully completed"
+  echo "Sauvegarde OK"
 else
-  echo "Error found during backup"
+  echo "Erreur pendant la sauvegarde"
 fi
 
 
-##### Remove backups older than {BACKUP_RETAIN_DAYS} days  #####
+##### Purge des sauvegardes de plus de {BACKUP_RETAIN_DAYS} jours  #####
 
 DBDELDATE=`date +"%d%b%Y" --date="${BACKUP_RETAIN_DAYS} days ago"`
 
@@ -45,5 +42,3 @@ if [ ! -z ${DB_BACKUP_PATH} ]; then
             rm -rf ${DBDELDATE}
       fi
 fi
-
-### End of script ####
