@@ -25,7 +25,9 @@ do
 	mysqldump --verbose ${i} | gzip > ${BACKUP_PATH}/${TODAY}/${i}-${TODAY}.sql.gz
 done
 
-if [ $? -eq 0 ]; then
+#if [ $? -eq 0 ]; then
+if test $? -eq 0
+then
   echo "Sauvegarde OK"
 else
   echo "Erreur pendant la sauvegarde"
