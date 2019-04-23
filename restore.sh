@@ -7,11 +7,15 @@ export PATH=/bin:/usr/bin:/usr/local/bin
 BACKUP_PATH='/root/backups'
 TODAY=`date +"%Y-%B-%d"`
 
+clear
 
-echo "Entrer nom de la base a restaurer"
+echo "Entrer le nom de la base a restaurer"
 read $BASE
 sleep 1
 
+echo "Entrer le chemin du fichier .sql.gz"
+read $BASE
+sleep 1
 
 # Recuperation du nom de fichier de la sauvegarde la plus récente
 #ls -ltrR $TODAY | grep $BASE > $FILE
