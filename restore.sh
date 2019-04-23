@@ -30,7 +30,7 @@ fi
 FILE="$BACKUP_PATH$1"
 
 # Import du fichier base.sql.gz dans mysql
-gunzip < $1 | mysql -u backup $2 --verbose
+gunzip < $FILE | mysql -u backup $2 --verbose
 
 if test $? -eq 0
 then
