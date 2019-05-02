@@ -31,7 +31,7 @@ do
 
 	# Export de la base vers un dossier avec la date
 	# Le nom du fichier créé porte le nom de la base et la date
-	mysqldump --verbose ${i} -u backup > ${BACKUP_PATH}/${INDEX_DAY}${TODAY}/${INDEX_HOUR}${i}-${HOURLY}.sql
+	mysqldump --verbose ${i} -u backup > ${BACKUP_PATH}/${INDEX_DAY}-${TODAY}/${INDEX_HOUR}-${i}-${HOURLY}.sql
 
 	# Vérification que l'export s'est déroulé correctement
 	if test $? -eq 0
@@ -42,7 +42,7 @@ do
 	fi
 
 	# Compression des fichiers créés avec le meilleur taux de compression
-	gzip -rv9 ${BACKUP_PATH}/${INDEX_DAY}${TODAY}/${INDEX_HOUR}${i}-${HOURLY}.sql
+	gzip -rv9 ${BACKUP_PATH}/${INDEX_DAY}-${TODAY}/${INDEX_HOUR}-${i}-${HOURLY}.sql
 
 	# Vérification que la compression s'est déroulée correctement
 	if test $? -eq 0
