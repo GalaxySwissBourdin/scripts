@@ -8,7 +8,7 @@
 ################################################################
 
 export PATH=/bin:/usr/bin:/usr/local/bin
-TODAY=`date +"%j-%Y-%B-%d"`
+TODAY=`date +"%Y-%B-%d"`
 INDEX_DAY=`date +"%j"`
 HOURLY=`date +"%Y-%B-%d-%H"`
 INDEX_HOUR=`date +"%H"`
