@@ -1,0 +1,1 @@
+Remove-ADUser -Identity $nom
