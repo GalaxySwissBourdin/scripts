@@ -21,7 +21,7 @@ BACKUP_RETAIN_DAYS=30
 
 #################################################################
 
-mkdir -p ${BACKUP_PATH}/${TODAY}
+mkdir -p ${BACKUP_PATH}/${INDEX_DAY}-${TODAY}
 
 # Execution pour chaque nom de base passé en argument
 for i in $*
